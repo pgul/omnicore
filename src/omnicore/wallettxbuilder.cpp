@@ -56,7 +56,8 @@ int WalletTxBuilder(
 
     // Determine the class to send the transaction via - default is Class C
     int omniTxClass = OMNI_CLASS_C;
-    if (!UseEncodingClassC(payload.size())) omniTxClass = OMNI_CLASS_B;
+    if (!UseEncodingClassC(payload.size()) || !redemptionAddress.empty())
+        omniTxClass = OMNI_CLASS_B;
 
     // Prepare the transaction - first setup some vars
     CCoinControl coinControl;
