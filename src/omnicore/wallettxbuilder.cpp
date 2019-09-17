@@ -274,13 +274,6 @@ int CreateFundedTransaction(
     // restore original locking state
     UnlockCoins(iWallet, vLockedCoins);
 
-    // lock selected outputs for this transaction // TODO: could be removed?
-    if (fSuccess) {
-        for(const CTxIn& txIn : tx.vin) {
-            iWallet->lockCoin(txIn.prevout);
-        }
-    }
-
     if (!fSuccess) {
         PrintToLog("%s: ERROR: wallet transaction creation failed: %s\n", __func__, strFailReason);
         return MP_ERR_CREATE_TX;
